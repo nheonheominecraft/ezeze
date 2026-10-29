@@ -1,0 +1,17 @@
+
+name: Build C++
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ilammy/msvc-dev-cmd@v1
+      - name: Compile
+        run: cl /EHsc main.cpp /Fe:main.exe
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-executable
+          path: main.exe
